@@ -6,8 +6,10 @@ Requirements:
 
 - Debian Ubuntu 18.04 LTS
 - git
-- docker ver. 19.03.13, build 4484c46d9d [^1]
+- docker ver. 19.03.13, build 4484c46d9d
 - docker-compose
+
+Side note: Newer docker versions might work too, though we currently cannot guarantee that.
 
 ## Set up the Workspace
 
@@ -44,14 +46,14 @@ Requirements:
                     └── ros-clients
     ```
 
-    All the directories inside `@openease` are repositories that need to be cloned. When doing so, it is important to clone them into the mentioned directory and then change their directory name to match the structure above. **DO NOT** create a folderstructure as above and then clone the repositories inside them. Lastly, the `ros-client` really needs to appear twice.
-
-    The repositories for the necessary modules are the following:
+    All the directories inside `@openease` are repositories that need to be cloned. The repositories for the necessary modules are the following:
 
     - `canvas-three`: <https://github.com/ease-crc/openease_threejs.git>
     - `charts`: <https://github.com/ease-crc/openease_d3.git>
     - `ros-clients`: <https://github.com/ease-crc/ros-js-clients>
     - `rosprolog-console`: <https://github.com/ease-crc/rosprolog-js-console>
+
+    It is important to clone them into the mentioned directory and then change their directory name to match the structure above. **DO NOT** create a folder structure as above and then clone the repositories inside them. Lastly, the `ros-client` really needs to appear twice.
 
 4. **Building the Docker Containers**: Open a terminal and follow the steps:
 
@@ -66,8 +68,6 @@ Requirements:
     - `openease-dockerbridge` container: Change to `<parent dir>/openease-dockerbridge` and run `docker build -t openease/dockerbridge .`
 
     Side note: The `openease` and `knowrob` container will take some time to finish building. To save time, you can run the three builds in different terminals.
-
-[^1]: Newer docker versions might work too, though we currently cannot guarantee that.
 
 ## Running the App
 
@@ -91,9 +91,9 @@ We provide an update script, so users do not need to manually update all the par
 
     If you do not how to set up your `git config`, check out this [page from atlassian](https://support.atlassian.com/bitbucket-cloud/docs/configure-your-dvcs-username-for-commits/).
 
-2. Save the [update script](TODO: add link to script) somewhere on your system
+2. Save the [update script](https://github.com/navidJadid/openease-setup/blob/main/update-openease.sh) somewhere on your system
 
-3. Edit the paths to the repositories in the script.
+3. Open the script with an editor of your choice, and edit the paths to the repositories.
 
     If you set up your repositories according to our guide, you just need to change the following path:
 
