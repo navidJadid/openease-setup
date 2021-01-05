@@ -149,3 +149,35 @@ You can then type the following commands into your terminal:
 
 - `docker-remove-with-images`: removes all docker containers and images
 - `docker-stop-and-remove`: stops all containers and removes all the containers
+
+<!-- markdownlint-disable-next-line MD026 -->
+## Possible Errors, Troubleshooting, etc.
+
+### Postgres Insertion Error
+
+If you see something like this:
+
+``` bash
+postgres        | ERROR:  column ... does not exist at character ...
+```
+
+then you might need to remove your volumes. Execute the following three commands in your terminal:
+
+``` bash
+docker-compose down
+docker-stop-and-remove (all containers)
+docker volume rm $(docker volume ls -q)
+```
+
+**WARNING**: The third command removes all volumes, even from other projects. If you need to preserve those, then you can instead use either `docker volume prune` (removes only volumes not used by any container), or list your volumes with `docker volume ls` and use `docker volume rm <VOLUME NAME>`.
+
+### Setting up the HTTPS-Certificate
+
+To set up the https cert, in your terminal execute the following two commands:
+
+``` bash
+cd <YOUR WORKSPACE>/openease/certs/
+./gencert.sh
+```
+
+You can also see the [docs](http://knowrob.org/doc/docker#setting_up_websocket_authentication).
