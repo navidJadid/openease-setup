@@ -11,6 +11,16 @@ Requirements:
 
 Side note: Newer docker versions might work too, though we currently cannot guarantee that.
 
+## Table of Contents
+
+- [Set up the Workspace](#set-up-the-workspace)
+- [Running the App](#runnin-the-app)
+- [Workspace Update-Script](#workspace-update-script)
+- [Useful stuff](#useful-stuff)
+- [Possible Errors, Troubleshooting, etc.](#possible-errors-troubleshooting-etc)
+  - [Postgres Insertion Error](#postgres-insertion-error)
+  - [Setting up the HTTPS-Certificate](#setting-up-the-https-certificate)
+
 ## Set up the Workspace
 
 1. **Setting up your system**: As of now, `openEASE` **only** runs on Debian Ubuntu 18.04. Make sure to have `git`,`docker`, and `docker-compose` installed as well (pay attention to the version; see the requirements above).
@@ -83,8 +93,8 @@ We provide an update script, so users do not need to manually update all the par
 1. Make sure your `git config` has the right username and e-mail (either locally or globally). You can check this in your terminal with:
 
     ``` shell
-        git config [--global] user.name
-        git config [--global] user.email
+    git config [--global] user.name
+    git config [--global] user.email
     ```
 
     (You only need the global flag, if you want to check your global `git config`. If you enter it, omit the square brackets.)
@@ -98,24 +108,24 @@ We provide an update script, so users do not need to manually update all the par
     If you set up your repositories according to our guide, you just need to change the following path:
 
     ``` shell
-        OPENEASE_ROOT=<path to the parent directory of the repositories>
+    OPENEASE_ROOT=<path to the parent directory of the repositories>
     ```
 
     Otherwise change the following paths:
 
     ``` shell
-        OPENEASE_ROOT=<path to the parent directory of the openease repository>
-        [...]
-        KNOWROB=<path to the knowrob repository>
-        DOCKERBRIDGE=<path to the openease-dockerbridge repository>
+    OPENEASE_ROOT=<path to the parent directory of the openease repository>
+    [...]
+    KNOWROB=<path to the knowrob repository>
+    DOCKERBRIDGE=<path to the openease-dockerbridge repository>
     ```
 
 4. You can run the script with `bash <location of the script>/update-openease.sh` together with any of the following option flags:
 
     ``` shell
-        -h: will display help information
-        -u: will update all the repositories
-        -b: will build all the containers
+    -h: will display help information
+    -u: will update all the repositories
+    -b: will build all the containers
     ```
 
 A few remarks on how the script works:
@@ -124,7 +134,7 @@ A few remarks on how the script works:
 - The order of the flags generally doesn't matter, i.e., if the update and build flag are passed together, then the update is always executed before the build.
 - If `-h` is used with other flags, it will take priority and disable the other flags' functionalities.
 
-## Useful stuff
+## Useful Stuff
 
 You can add these utility functions to your `.bashrc`, to have access to them from anywhere.
 
