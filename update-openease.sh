@@ -112,6 +112,7 @@ then
     read user_input
 
     lowercase_input=${user_input,,}
+    echo ""
 
     proceed=false
 
@@ -122,6 +123,7 @@ then
         echo "Input was not valid, please enter only 'yes' or 'no'."
         read user_input
         lowercase_input=${user_input,,}
+        echo ""
     done
 
     if [[ $lowercase_input == $Y || $lowercase_input == $YES ]]
@@ -135,7 +137,6 @@ then
         print-separator-lines
         build-all-containers
     else
-        echo ""
         echo "Aborted actions"
     fi
     
