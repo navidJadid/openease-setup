@@ -8,6 +8,7 @@ Requirements:
 - git
 - docker ver. 19.03.13, build 4484c46d9d
 - docker-compose
+- (Firefox; see [Possible Errors, Troubleshooting, etc.](#possible-errors-troubleshooting-etc))
 
 Side note: Newer docker versions might work too, though we currently cannot guarantee that.
 
@@ -162,6 +163,11 @@ You can then type the following commands into your terminal:
 
 <!-- markdownlint-disable-next-line MD026 -->
 ## Possible Errors, Troubleshooting, etc.
+
+### "nginx - bad gateway" when using Chromium-based browsers, especially after configuring neemhub-settings
+
+Try using Firefox, at least for setting the neemhub-settings. Afterwards it should be possible to use Chromium-based browsers again. We assume that some errors come about because of Chromium-based browsers caching behaviour.
+It might also be necessary to `docker-compose down` and delete volumes from openease. See the [next section](#postgres-insertion-error) for a description of how to do that.
 
 ### Postgres Insertion Error
 
