@@ -8,14 +8,13 @@ Requirements:
 - git
 - docker ver. 19.03.13, build 4484c46d9d
 - docker-compose
-- (Firefox; see [Possible Errors, Troubleshooting, etc.](#possible-errors-troubleshooting-etc))
 
 Side note: Newer docker versions might work too, though we currently cannot guarantee that.
 
 ## Table of Contents
 
 - [Set up the Workspace](#set-up-the-workspace)
-- [Running the App](#runnin-the-app)
+- [Running the App](#running-the-app)
 - [Workspace Update-Script](#workspace-update-script)
 - [Useful stuff](#useful-stuff)
 - [Possible Errors, Troubleshooting, etc.](#possible-errors-troubleshooting-etc)
@@ -24,49 +23,116 @@ Side note: Newer docker versions might work too, though we currently cannot guar
 
 ## Set up the Workspace
 
-1. **Setting up your system**: As of now, `openEASE` **only** runs on Debian Ubuntu 18.04. Make sure to have `git`,`docker`, and `docker-compose` installed as well (pay attention to the version; see the requirements above).
+1. **Setting up your system**: As of now, `openEASE` **only** runs on Debian Ubuntu 18.04. Make sure to have `git`, `docker`, and `docker-compose` installed as well (pay attention to the version; see the requirements above).
 
-2. **Cloning the necessary repositories**: Create a workspace folder somewhere and clone the following three repositories into it:
+2. **Cloning the necessary repositories**: There are two ways to clone the necessary repositories, which is either to do it manually, or by using our install-script.
 
-    - `openease`: <https://github.com/ease-crc/openease>
-    - `knowrob`: <https://github.com/daniel86/knowrob>
-    - `openease-dockerbridge`: <https://github.com/ease-crc/openease_dockerbridge>
+    2.1. **Using the install-script**
 
-    The directory structure should then look something like this:
+    First, save the [install-script](https://github.com/navidJadid/openease-setup/blob/main/install.sh) somewhere on your system.
 
-    ``` system
-    <workspace directory>
-    └─ openease
-    └─ knowrob
-    └─ openease-dockerbridge
+    By default, the script would install `openEase` into `~/Documents/openease_workspace`. However, if you want to change the installation location, then open the script with an editor of your choice, and edit the following path:
+
+    ``` shell
+    OPENEASE_ROOT_PATH=<path to the parent directory of the repositories>
     ```
 
-    (It is of course also possible to put them in separate places, but this guide will assume they share the same parent directory.)
+    Normally, the script would clone the `knowrob` and `dockerbridge` repositories into the same parent directory, but if you want them to end up somewhere else, then change the following paths as well:
 
-3. **Cloning the `node modules`**: This step is a bit cumbersome, but make sure to do it correctly! Inside the `openease` directory, we need to create a folder structure, which looks like this (read the following explanations, before proceeding):
-
-    ``` system
-    node_modules/
-    └── @openease
-        ├── canvas-three
-        ├── charts
-        ├── ros-clients
-        └── rosprolog-console
-            └── node_modules
-                └── @openease
-                    └── ros-clients
+    ``` shell
+    KNOWROB_PATH=<path to the knowrob repository>
+    DOCKERBRIDGE_PATH=<path to the openease-dockerbridge repository>
     ```
 
-    All the directories inside `@openease` are repositories that need to be cloned. The repositories for the necessary modules are the following:
+    It is also possible to change the target repositories, if, for example, you want to clone a fork, instead of the original repository. For that you can replace any of the following with the HTTPS to your git-fork:
 
-    - `canvas-three`: <https://github.com/ease-crc/openease_threejs.git>
-    - `charts`: <https://github.com/ease-crc/openease_d3.git>
-    - `ros-clients`: <https://github.com/ease-crc/ros-js-clients>
-    - `rosprolog-console`: <https://github.com/ease-crc/rosprolog-js-console>
+    ``` shell
+    OPENEASE_REPO="https://github.com/ease-crc/openease.git"
+    CANVAS_THREE_REPO="https://github.com/ease-crc/openease_threejs.git"
+    CHARTS_REPO="https://github.com/ease-crc/openease_d3.git"
+    ROS_CLIENTS_REPO="https://github.com/ease-crc/ros-js-clients.git"
+    ROSPROLOG_REPO="https://github.com/ease-crc/rosprolog-js-console.git"
+    KNOWROB_REPO="https://github.com/daniel86/knowrob.git"
+    DOCKERBRIDGE_REPO="https://github.com/ease-crc/openease_dockerbridge.git"
+    ```
 
-    It is important to clone them into the mentioned directory and then change their directory name to match the structure above. **DO NOT** create a folder structure as above and then clone the repositories inside them. Lastly, the `ros-client` really needs to appear twice.
+    Lastly, make sure your `git config` has the right username and e-mail (either locally or globally). You can check this in your terminal with:
 
-4. **Building the Docker Containers**: Open a terminal and follow the steps:
+    ``` shell
+    git config [--global] user.name
+    git config [--global] user.email
+    ```
+
+    You only need the global flag, if you want to check your global `git config`. If you enter it, omit the square brackets. If you do not how to set up your `git config`, check out this [page from atlassian](https://support.atlassian.com/bitbucket-cloud/docs/configure-your-dvcs-username-for-commits/).
+
+    **IMPORTANT**: If you don't have a global `git-config`, you have to make sure to create the target parent directories **before** executing the script and set up the local `git-config` (otherwise the script cannot clone the repositories due to lacking credentials).
+
+    Finally, open a terminal and execute `bash <location of the script>/install.sh`. Check the console output and folder structures to see if everything installed properly. The intended folder structure (for the default installation) should be:
+
+    ``` system
+        <workspace directory>
+        └─ openease
+        └─ knowrob
+        └─ openease-dockerbridge
+    ```
+
+    And inside the openease-directory:
+
+    ``` system
+        node_modules/
+        └── @openease
+            ├── canvas-three
+            ├── charts
+            ├── ros-clients
+            └── rosprolog-console
+                └── node_modules
+                    └── @openease
+                        └── ros-clients
+    ```
+
+    2.2. **Cloning everything manually**
+
+    - First, create a workspace folder somewhere and clone the following three repositories into it:
+
+        - `openease`: <https://github.com/ease-crc/openease>
+        - `knowrob`: <https://github.com/daniel86/knowrob>
+        - `openease-dockerbridge`: <https://github.com/ease-crc/openease_dockerbridge>
+
+        The directory structure should then look something like this:
+
+        ``` system
+        <workspace directory>
+        └─ openease
+        └─ knowrob
+        └─ openease-dockerbridge
+        ```
+
+        (It is of course also possible to put them in separate places, but this guide will assume they share the same parent directory.)
+
+    - Next, we need to clone the `node modules`. This step is a bit cumbersome, but make sure to do it correctly! Inside the `openease` directory, we need to create a folder structure, which looks like this (read the following explanations, before proceeding):
+
+        ``` system
+        node_modules/
+        └── @openease
+            ├── canvas-three
+            ├── charts
+            ├── ros-clients
+            └── rosprolog-console
+                └── node_modules
+                    └── @openease
+                        └── ros-clients
+        ```
+
+        All the directories inside `@openease` are repositories that need to be cloned. The repositories for the necessary modules are the following:
+
+        - `canvas-three`: <https://github.com/ease-crc/openease_threejs.git>
+        - `charts`: <https://github.com/ease-crc/openease_d3.git>
+        - `ros-clients`: <https://github.com/ease-crc/ros-js-clients>
+        - `rosprolog-console`: <https://github.com/ease-crc/rosprolog-js-console>
+
+        It is important to clone them into the mentioned directory and then change their directory name to match the structure above. **DO NOT** create a folder structure as above and then clone the repositories inside them. Lastly, the `ros-client` really needs to appear twice.
+
+3. **Building the Docker Containers**: Open a terminal and follow the steps.
 
     - `openease` container: Change to `<parent dir>/openease` and run `docker build -t openease/app .`
     - `knowrob` container: First, with an editor of your choice, open the `dockerfile` in `<parent dir>/knowrob/docker`, and change line 85 to:
@@ -77,6 +143,8 @@ Side note: Newer docker versions might work too, though we currently cannot guar
 
         Then, in your terminal change to `<parent dir>/knowrob/docker` and run `docker build -t openease/knowrob .`
     - `openease-dockerbridge` container: Change to `<parent dir>/openease-dockerbridge` and run `docker build -t openease/dockerbridge .`
+
+    Alternatively, it is possible to build the containers with the update-script by passing the `-b` flag (s. [Workspace Update-Script](#workspace-update-script)). Make sure to follow the given steps, before executing the script.
 
     Side note: The `openease` and `knowrob` container will take some time to finish building. To save time, you can run the three builds in different terminals.
 
@@ -91,37 +159,34 @@ To use the app, you will need to create an account or alternatively request the 
 
 We provide an update script, so users do not need to manually update all the parts of the software. The script can update all the repositories which we cloned and build all the containers from the previous chapter. To use the script, do the following:
 
-1. Make sure your `git config` has the right username and e-mail (either locally or globally). You can check this in your terminal with:
+1. Again, make sure your `git config` has the right username and e-mail (either locally or globally). You can check this in your terminal with:
 
     ``` shell
     git config [--global] user.name
     git config [--global] user.email
     ```
 
-    (You only need the global flag, if you want to check your global `git config`. If you enter it, omit the square brackets.)
+    You only need the global flag, if you want to check your global `git config`. If you enter it, omit the square brackets. If you do not how to set up your `git config`, check out this [page from atlassian](https://support.atlassian.com/bitbucket-cloud/docs/configure-your-dvcs-username-for-commits/).
 
-    If you do not how to set up your `git config`, check out this [page from atlassian](https://support.atlassian.com/bitbucket-cloud/docs/configure-your-dvcs-username-for-commits/).
-
-2. Save the [update script](https://github.com/navidJadid/openease-setup/blob/main/update-openease.sh) somewhere on your system
+2. Save the [update-script](https://github.com/navidJadid/openease-setup/blob/main/update.sh) somewhere on your system.
 
 3. Open the script with an editor of your choice, and edit the paths to the repositories.
-
-    If you set up your repositories according to our guide, you just need to change the following path:
+TODO
+    If you used our install-script with the default path (`~/Documents/openease_workspace`), you can skip this step.
+    But if you set up your repositories manually and according to our guide, you just need to change the following path:
 
     ``` shell
     OPENEASE_ROOT=<path to the parent directory of the repositories>
     ```
 
-    Otherwise change the following paths:
+    Otherwise change the following paths too:
 
     ``` shell
-    OPENEASE_ROOT=<path to the parent directory of the openease repository>
-    [...]
     KNOWROB=<path to the knowrob repository>
     DOCKERBRIDGE=<path to the openease-dockerbridge repository>
     ```
 
-4. You can run the script with `bash <location of the script>/update-openease.sh` together with any of the following option flags:
+4. You can run the script with `bash <location of the script>/update.sh` together with any of the following option flags:
 
     ``` shell
     -h: will display help information
