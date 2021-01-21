@@ -3,7 +3,7 @@
 # If all repositories have the same root directories, only
 # change $OPENEASE_ROOT. If the knowrob and dockerbridge repo
 # have different directories as root, change their paths as well.
-OPENEASE_ROOT=~/Documents/Work
+OPENEASE_ROOT=~/Documents/openease_workspace
 OPENEASE_WEBAPP="$OPENEASE_ROOT/openease"
 CANVAS_THREE="$OPENEASE_WEBAPP/node_modules/@openease/canvas-three"
 CHARTS="$OPENEASE_WEBAPP/node_modules/@openease/charts"
