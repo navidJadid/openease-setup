@@ -170,8 +170,8 @@ We provide an update script, so users do not need to manually update all the par
 
 2. Save the [update-script](https://github.com/navidJadid/openease-setup/blob/main/update.sh) somewhere on your system.
 
-3. Open the script with an editor of your choice, and edit the paths to the repositories.
-TODO
+3. Open the script with an editor of your choice, and edit the paths to the repositories:
+
     If you used our install-script with the default path (`~/Documents/openease_workspace`), you can skip this step.
     But if you set up your repositories manually and according to our guide, you just need to change the following path:
 
