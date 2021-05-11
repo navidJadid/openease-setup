@@ -11,7 +11,7 @@ ROS_CLIENTS="$OPENEASE_WEBAPP/node_modules/@openease/ros-clients"
 ROSPROLOG_ROS_CLIENTS="$OPENEASE_WEBAPP/node_modules/@openease/rosprolog-console/node_modules/@openease/ros-clients"
 ROSPROLOG="$OPENEASE_WEBAPP/node_modules/@openease/rosprolog-console"
 KNOWROB="$OPENEASE_ROOT/knowrob"
-DOCKERBRIDGE="$OPENEASE_ROOT/openease_dockerbridge"
+DOCKERBRIDGE="$OPENEASE_ROOT/dockerbridge"
 
 # Option flags
 UPDATE_FROM_REMOTE="-u"
