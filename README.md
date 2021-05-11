@@ -7,9 +7,9 @@ Requirements:
 - Debian Ubuntu 18.04 LTS
 - git
 - docker ver. 19.03.13, build 4484c46d9d
-- docker-compose
+- docker-compose 1.25.4
 
-Side note: Newer docker versions might work too, though we currently cannot guarantee that.
+Side note: Newer `docker` and `docker-compose` versions might work too, though we currently cannot guarantee that. If you are successful in getting it to run on newer versions, please let us know about your experiences or consider contributing to this repository via Pull-Request.
 
 ## Table of Contents
 
