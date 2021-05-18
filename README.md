@@ -29,19 +29,33 @@ Side note: Newer `docker` and `docker-compose` versions might work too, though w
 
     2.1. **Using the install-script**
 
-    First, save the [install-script](https://github.com/navidJadid/openease-setup/blob/main/install.sh) somewhere on your system.
+    First, clone this repository or save the [install-script `install.sh`](https://github.com/navidJadid/openease-setup/blob/main/install.sh) together with the [configuration `config.sh`](https://github.com/navidJadid/openease-setup/blob/main/config.sh) in the same directory somewhere on your system. Cloning the repository has the benefit that you also save the [update-script `update.sh`](https://github.com/navidJadid/openease-setup/blob/main/update.sh) into the same directory already, meaning you can later execute it without further setup.
 
     By default, the script would install `openEase` into `~/Documents/openease_workspace`. However, if you want to change the installation location, then open the script with an editor of your choice, and edit the following path:
 
     ``` shell
-    OPENEASE_ROOT_PATH=<path to the parent directory of the repositories>
+    OPENEASE_ROOT_DIR=<path to the parent directory of the repositories>
     ```
 
-    Normally, the script would clone the `knowrob` and `dockerbridge` repositories into the same parent directory, but if you want them to end up somewhere else, then change the following paths as well:
+    Normally, the script would clone the `openease`, `knowrob` and `dockerbridge` repositories into the same parent directory, but if you instead want them to end upin different locations, then change the following paths:
 
     ``` shell
-    KNOWROB_PATH=<path to the knowrob repository>
-    DOCKERBRIDGE_PATH=<path to the openease-dockerbridge repository>
+    OPENEASE_PARENT_DIR=<path to the openease repository>
+    [...]
+    KNOWROB_PARENT_DIR=<path to the knowrob repository>
+    [...]
+    DOCKERBRIDGE_PARENT_DIR=<path to the openease-dockerbridge repository>
+    ```
+
+    If you want to change the folder names the modules will be installed into, you can adjust the following variables:
+
+    ``` shell
+    # folder names for the modules
+    [...]
+    OPENEASE="openease"             # openease webapp-container
+    [...]
+    KNOWROB="knowrob"               # knowrob-container
+    DOCKERBRIDGE="dockerbridge"     # dockerbridge-container
     ```
 
     It is also possible to change the target repositories, if, for example, you want to clone a fork, instead of the original repository. For that you can replace any of the following with the HTTPS to your git-fork:
@@ -166,24 +180,37 @@ We provide an update script, so users do not need to manually update all the par
     git config [--global] user.email
     ```
 
-    You only need the global flag, if you want to check your global `git config`. If you enter it, omit the square brackets. If you do not how to set up your `git config`, check out this [page from atlassian](https://support.atlassian.com/bitbucket-cloud/docs/configure-your-dvcs-username-for-commits/).
+    You only need the global flag if you want to check your global `git config`. If you enter it, omit the square brackets. If you do not how to set up your `git config`, check out this [page from atlassian](https://support.atlassian.com/bitbucket-cloud/docs/configure-your-dvcs-username-for-commits/).
 
-2. Save the [update-script](https://github.com/navidJadid/openease-setup/blob/main/update.sh) somewhere on your system.
+2. If you have already cloned this repository according to point 2.1 in the section [Set up the Workspace](#set-up-the-workspace), then you can skip to point 3. Otherwise, save the [update-script](https://github.com/navidJadid/openease-setup/blob/main/update.sh) together with the [configuration `config.sh`](https://github.com/navidJadid/openease-setup/blob/main/config.sh) in the same directory somewhere on your system.
 
-3. Open the script with an editor of your choice, and edit the paths to the repositories:
+3. If you used the install script and already set up your workspace according to point 2.1 in the section [Set up the Workspace](#set-up-the-workspace), then you are good to go can skip to point 4. If instead, you cloned the repositories manually, open `config.sh` with an editor of your choice, and edit the paths to the repositories. 
 
-    If you used our install-script with the default path (`~/Documents/openease_workspace`), you can skip this step.
-    But if you set up your repositories manually and according to our guide, you just need to change the following path:
+    First, if `openease`, `knowrob`, and `dockerbridge` all have the same parent directory, only change the following variable:
 
     ``` shell
-    OPENEASE_ROOT=<path to the parent directory of the repositories>
+    OPENEASE_ROOT_DIR=<path to the parent directory of the repositories>
     ```
 
-    Otherwise change the following paths too:
+    Otherwise change the following paths:
 
     ``` shell
-    KNOWROB=<path to the knowrob repository>
-    DOCKERBRIDGE=<path to the openease-dockerbridge repository>
+    OPENEASE_PARENT_DIR=<path to the openease repository>
+    [...]
+    KNOWROB_PARENT_DIR=<path to the knowrob repository>
+    [...]
+    DOCKERBRIDGE_PARENT_DIR=<path to the openease-dockerbridge repository>
+    ```
+
+    It might also be useful to check the variables for the folder names, to check if they are the same as your local folder names:
+
+    ``` shell
+    # folder names for the modules
+    [...]
+    OPENEASE="openease"             # openease webapp-container
+    [...]
+    KNOWROB="knowrob"               # knowrob-container
+    DOCKERBRIDGE="dockerbridge"     # dockerbridge-container
     ```
 
 4. You can run the script with `bash <location of the script>/update.sh` together with any of the following option flags:

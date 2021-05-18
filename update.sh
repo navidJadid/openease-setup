@@ -1,17 +1,8 @@
 #!/bin/sh
 
-# If all repositories have the same root directories, only
-# change $OPENEASE_ROOT. If the knowrob and dockerbridge repo
-# have different directories as root, change their paths as well.
-OPENEASE_ROOT=~/Documents/openease_workspace
-OPENEASE_WEBAPP="$OPENEASE_ROOT/openease"
-CANVAS_THREE="$OPENEASE_WEBAPP/node_modules/@openease/canvas-three"
-CHARTS="$OPENEASE_WEBAPP/node_modules/@openease/charts"
-ROS_CLIENTS="$OPENEASE_WEBAPP/node_modules/@openease/ros-clients"
-ROSPROLOG_ROS_CLIENTS="$OPENEASE_WEBAPP/node_modules/@openease/rosprolog-console/node_modules/@openease/ros-clients"
-ROSPROLOG="$OPENEASE_WEBAPP/node_modules/@openease/rosprolog-console"
-KNOWROB="$OPENEASE_ROOT/knowrob"
-DOCKERBRIDGE="$OPENEASE_ROOT/dockerbridge"
+source ./config.sh
+
+# Make sure to set git.config accordingly, before running this script
 
 # Option flags
 UPDATE_FROM_REMOTE="-u"
@@ -37,20 +28,20 @@ function go-to-directory-and-pull {
 function update-all-directories-from-remote {
     echo "Updating local repositories from remote origin..."
     echo ""
-    for LOCAL_PATH in   $OPENEASE_WEBAPP \
-                        $CANVAS_THREE \
-                        $CHARTS \
-                        $ROS_CLIENTS \
-                        $ROSPROLOG_ROS_CLIENTS \
-                        $ROSPROLOG \
-                        $KNOWROB \
-                        $DOCKERBRIDGE \
-                        $OPENEASE_WEBAPP; do
+    for LOCAL_PATH in   $OPENEASE_WEBAPP_PATH \
+                        $CANVAS_THREE_PATH \
+                        $CHARTS_PATH \
+                        $ROS_CLIENTS_PATH \
+                        $ROSPROLOG_ROS_CLIENTS_PATH \
+                        $ROSPROLOG_PATH \
+                        $KNOWROB_PATH \
+                        $DOCKERBRIDGE_PATH \
+                        $OPENEASE_WEBAPP_PATH; do
         go-to-directory-and-pull $LOCAL_PATH
     done
 }
 
-KNOWROB_DOCKER="$KNOWROB/docker"
+KNOWROB_DOCKER="$KNOWROB_PATH/docker"
 
 WEBAPP_CONTAINER="openease/app"
 KNOWROB_CONTAINER="openease/knowrob"
@@ -67,9 +58,9 @@ function build-container {
 function build-all-containers {
     echo "Updating docker containers..."
     echo ""
-    build-container $OPENEASE_WEBAPP $WEBAPP_CONTAINER
+    build-container $OPENEASE_WEBAPP_PATH $WEBAPP_CONTAINER
     build-container $KNOWROB_DOCKER $KNOWROB_CONTAINER
-    build-container $DOCKERBRIDGE $DOCKERBRIDGE_CONTAINER
+    build-container $DOCKERBRIDGE_PATH $DOCKERBRIDGE_CONTAINER
 }
 
 function print-separator-lines {
