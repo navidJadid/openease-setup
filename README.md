@@ -284,3 +284,17 @@ cd <YOUR WORKSPACE>/openease/certs/
 ```
 
 You can also see the [docs](http://knowrob.org/doc/docker#setting_up_websocket_authentication).
+
+### Install or Update Script cannot find the Configuration file
+
+When calling the install or update script from within another script, it might be possible, that the path to `config.sh` cannot be properly resolved. This might result in more errors. The fix is to replace the relative path to the config file at the beginning of both scripts with an absolute one. There change this:
+
+``` bash
+source ./config.sh
+```
+
+to
+
+``` bash
+source <absolute path to config-file>/config.sh
+```

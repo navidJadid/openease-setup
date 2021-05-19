@@ -1,5 +1,9 @@
 #!/bin/sh
 
+# If you call this script from within another script
+# it might be necessary to use an absolute path.
+# Otherwise there might be problems resolving the
+# path to config.sh
 source ./config.sh
 
 # Make sure to set git.config accordingly, before running this script
