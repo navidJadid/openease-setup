@@ -33,11 +33,6 @@ function update-all-directories-from-remote {
     echo "Updating local repositories from remote origin..."
     echo ""
     for LOCAL_PATH in   $OPENEASE_WEBAPP_PATH \
-                        $CANVAS_THREE_PATH \
-                        $CHARTS_PATH \
-                        $ROS_CLIENTS_PATH \
-                        $ROSPROLOG_ROS_CLIENTS_PATH \
-                        $ROSPROLOG_PATH \
                         $KNOWROB_PATH \
                         $DOCKERBRIDGE_PATH \
                         $OPENEASE_WEBAPP_PATH; do

@@ -4,7 +4,7 @@ This is a small guide on how to currently set up openEASE, which will walk you t
 
 Requirements:
 
-- Debian Ubuntu 18.04 LTS
+- Debian Ubuntu 18.04 LTS (other operating systems exhibit some bugs)
 - git
 - docker ver. 19.03.13, build 4484c46d9d
 - docker-compose 1.25.4
@@ -23,7 +23,7 @@ Side note: Newer `docker` and `docker-compose` versions might work too, though w
 
 ## Set up the Workspace
 
-1. **Setting up your system**: As of now, `openEASE` **only** runs on Debian Ubuntu 18.04. Make sure to have `git`, `docker`, and `docker-compose` installed as well (pay attention to the version; see the requirements above).
+1. **Setting up your system**: As of now, `openEASE` **only** runs on Debian Ubuntu 18.04 without problems. Other operating systems might work to an extent as well, but certain features might not work properly. Furthermore, make sure to have `git`, `docker`, and `docker-compose` installed as well (pay attention to the version; see the requirements above).
 
 2. **Cloning the necessary repositories**: There are two ways to clone the necessary repositories, which is either to do it manually, or by using our install-script.
 
@@ -53,7 +53,6 @@ Side note: Newer `docker` and `docker-compose` versions might work too, though w
     # folder names for the modules
     [...]
     OPENEASE="openease"             # openease webapp-container
-    [...]
     KNOWROB="knowrob"               # knowrob-container
     DOCKERBRIDGE="dockerbridge"     # dockerbridge-container
     ```
@@ -62,10 +61,6 @@ Side note: Newer `docker` and `docker-compose` versions might work too, though w
 
     ``` shell
     OPENEASE_REPO="https://github.com/ease-crc/openease.git"
-    CANVAS_THREE_REPO="https://github.com/ease-crc/openease_threejs.git"
-    CHARTS_REPO="https://github.com/ease-crc/openease_d3.git"
-    ROS_CLIENTS_REPO="https://github.com/ease-crc/ros-js-clients.git"
-    ROSPROLOG_REPO="https://github.com/ease-crc/rosprolog-js-console.git"
     KNOWROB_REPO="https://github.com/daniel86/knowrob.git"
     DOCKERBRIDGE_REPO="https://github.com/ease-crc/openease_dockerbridge.git"
     ```
@@ -79,61 +74,24 @@ Side note: Newer `docker` and `docker-compose` versions might work too, though w
         └─ openease-dockerbridge
     ```
 
-    And inside the openease-directory:
-
-    ``` system
-        node_modules/
-        └── @openease
-            ├── canvas-three
-            ├── charts
-            ├── ros-clients
-            └── rosprolog-console
-                └── node_modules
-                    └── @openease
-                        └── ros-clients
-    ```
-
     2.2. **Cloning everything manually**
 
-    - First, create a workspace folder somewhere and clone the following three repositories into it:
+    Create a workspace folder somewhere and clone the following three repositories into it:
 
-        - `openease`: <https://github.com/ease-crc/openease>
-        - `knowrob`: <https://github.com/daniel86/knowrob>
-        - `openease-dockerbridge`: <https://github.com/ease-crc/openease_dockerbridge>
+    - `openease`: <https://github.com/ease-crc/openease>
+    - `knowrob`: <https://github.com/daniel86/knowrob>
+    - `openease-dockerbridge`: <https://github.com/ease-crc/openease_dockerbridge>
 
-        The directory structure should then look something like this:
+    The directory structure should then look something like this:
 
-        ``` system
+    ``` system
         <workspace directory>
         └─ openease
         └─ knowrob
         └─ openease-dockerbridge
-        ```
+    ```
 
-        (It is of course also possible to put them in separate places, but this guide will assume they share the same parent directory.)
-
-    - Next, we need to clone the `node modules`. This step is a bit cumbersome, but make sure to do it correctly! Inside the `openease` directory, we need to create a folder structure, which looks like this (read the following explanations, before proceeding):
-
-        ``` system
-        node_modules/
-        └── @openease
-            ├── canvas-three
-            ├── charts
-            ├── ros-clients
-            └── rosprolog-console
-                └── node_modules
-                    └── @openease
-                        └── ros-clients
-        ```
-
-        All the directories inside `@openease` are repositories that need to be cloned. The repositories for the necessary modules are the following:
-
-        - `canvas-three`: <https://github.com/ease-crc/openease_threejs.git>
-        - `charts`: <https://github.com/ease-crc/openease_d3.git>
-        - `ros-clients`: <https://github.com/ease-crc/ros-js-clients>
-        - `rosprolog-console`: <https://github.com/ease-crc/rosprolog-js-console>
-
-        It is important to clone them into the mentioned directory and then change their directory name to match the structure above. **DO NOT** create a folder structure as above and then clone the repositories inside them. Lastly, the `ros-client` really needs to appear twice.
+    (It is of course also possible to put them in separate places, but this guide will assume they share the same parent directory.)
 
 3. **Building the Docker Containers**: Open a terminal and follow the steps.
 
@@ -153,7 +111,7 @@ Side note: Newer `docker` and `docker-compose` versions might work too, though w
 
 ## Running the App
 
-After everything is set up and you have built all the necessary containers from our repositories, open a terminal and change to the directory of your `openease` repository. Then run `docker-compose up`. If everything runs smoothly, you can access the app via `localhost` in your webbrowser.
+After everything is set up and you have built all the necessary containers from our repositories, open a terminal and change to the directory of your `openease` repository. Then run `docker-compose up`. If everything runs smoothly, you can access the app via `localhost:5000` in your webbrowser.
 Running `docker-compose down` in a separate terminal will shut down the application. Alternatively press `CTRL` + `C` and then you can run the command in the same terminal.
 
 To use the app, you will need to create an account or alternatively request the admin login from your supervisor(s). In order to access the Neem-Hub, one needs to enter the access credentials in the NEEM-Hub settings. Please request Neem configurations from your supervisor(s) or researchers at IAI-Bremen.
@@ -188,7 +146,6 @@ We provide an update script, so users do not need to manually update all the par
     # folder names for the modules
     [...]
     OPENEASE="openease"             # openease webapp-container
-    [...]
     KNOWROB="knowrob"               # knowrob-container
     DOCKERBRIDGE="dockerbridge"     # dockerbridge-container
     ```
