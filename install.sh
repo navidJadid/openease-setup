@@ -6,8 +6,6 @@
 # path to config.sh
 source ./config.sh
 
-# Make sure to set git.config accordingly, before running this script
-
 function clone-repository-into-dir {
     echo "----------------------------------"
     cd $1                   # change to destination directory

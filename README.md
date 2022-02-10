@@ -70,17 +70,6 @@ Side note: Newer `docker` and `docker-compose` versions might work too, though w
     DOCKERBRIDGE_REPO="https://github.com/ease-crc/openease_dockerbridge.git"
     ```
 
-    Lastly, make sure your `git config` has the right username and e-mail (either locally or globally). You can check this in your terminal with:
-
-    ``` shell
-    git config [--global] user.name
-    git config [--global] user.email
-    ```
-
-    You only need the global flag, if you want to check your global `git config`. If you enter it, omit the square brackets. If you do not how to set up your `git config`, check out this [page from atlassian](https://support.atlassian.com/bitbucket-cloud/docs/configure-your-dvcs-username-for-commits/).
-
-    **IMPORTANT**: If you don't have a global `git-config`, you have to make sure to create the target parent directories **before** executing the script and set up the local `git-config` (otherwise the script cannot clone the repositories due to lacking credentials).
-
     Finally, open a terminal and execute `bash <location of the script>/install.sh`. Check the console output and folder structures to see if everything installed properly. The intended folder structure (for the default installation) should be:
 
     ``` system
@@ -173,18 +162,9 @@ To use the app, you will need to create an account or alternatively request the 
 
 We provide an update script, so users do not need to manually update all the parts of the software. The script can update all the repositories which we cloned and build all the containers from the previous chapter. To use the script, do the following:
 
-1. Again, make sure your `git config` has the right username and e-mail (either locally or globally). You can check this in your terminal with:
+1. If you have already cloned this repository according to point 2.1 in the section [Set up the Workspace](#set-up-the-workspace), then you can skip to point 2. Otherwise, save the [update-script](https://github.com/navidJadid/openease-setup/blob/main/update.sh) together with the [configuration `config.sh`](https://github.com/navidJadid/openease-setup/blob/main/config.sh) in the same directory somewhere on your system.
 
-    ``` shell
-    git config [--global] user.name
-    git config [--global] user.email
-    ```
-
-    You only need the global flag if you want to check your global `git config`. If you enter it, omit the square brackets. If you do not how to set up your `git config`, check out this [page from atlassian](https://support.atlassian.com/bitbucket-cloud/docs/configure-your-dvcs-username-for-commits/).
-
-2. If you have already cloned this repository according to point 2.1 in the section [Set up the Workspace](#set-up-the-workspace), then you can skip to point 3. Otherwise, save the [update-script](https://github.com/navidJadid/openease-setup/blob/main/update.sh) together with the [configuration `config.sh`](https://github.com/navidJadid/openease-setup/blob/main/config.sh) in the same directory somewhere on your system.
-
-3. If you used the install script and already set up your workspace according to point 2.1 in the section [Set up the Workspace](#set-up-the-workspace), then you are good to go can skip to point 4. If instead, you cloned the repositories manually, open `config.sh` with an editor of your choice, and edit the paths to the repositories. 
+2. If you used the install script and already set up your workspace according to point 2.1 in the section [Set up the Workspace](#set-up-the-workspace), then you are good to go and can skip to point 3. If instead, you cloned the repositories manually, open `config.sh` with an editor of your choice, and edit the paths to the repositories.
 
     First, if `openease`, `knowrob`, and `dockerbridge` all have the same parent directory, only change the following variable:
 
@@ -213,7 +193,7 @@ We provide an update script, so users do not need to manually update all the par
     DOCKERBRIDGE="dockerbridge"     # dockerbridge-container
     ```
 
-4. You can run the script with `bash <location of the script>/update.sh` together with any of the following option flags:
+3. You can run the script with `bash <location of the script>/update.sh` together with any of the following option flags:
 
     ``` shell
     -h: will display help information
