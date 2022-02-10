@@ -106,7 +106,7 @@ then
 
     read user_input
 
-    lowercase_input=${user_input,,}
+    lowercase_input=${user_input}
     echo ""
 
     proceed=false
