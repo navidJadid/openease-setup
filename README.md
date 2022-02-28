@@ -2,6 +2,8 @@
 
 This is a small guide on how to currently set up openEASE, which will walk you through the steps necessary to install the separate components.
 
+**IMPORTANT!** The `master`-branch does not install the openEASE node-modules separately. For that, check out either the `advanced`-branch (can install and update them via script) or clone the necessary repositories yourself and place them inside a `node_modules`-directory inside the `openease`-repository.
+
 Requirements:
 
 - Debian Ubuntu 18.04 LTS (other operating systems exhibit some bugs)
