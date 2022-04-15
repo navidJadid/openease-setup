@@ -6,12 +6,19 @@ This is a small guide on how to currently set up openEASE, which will walk you t
 
 Requirements:
 
-- Debian Ubuntu 18.04 LTS (other operating systems exhibit some bugs)
+- Debian Ubuntu 18.04 LTS or 20.04 LTS
+- git
+- docker
+- docker-compose
+
+Side note: In case the latest version of the requirements above do not work, the following versions are confirmed to build the project properly:
+
+- Debian Ubuntu 18.04 LTS
 - git
 - docker ver. 19.03.13, build 4484c46d9d
 - docker-compose 1.25.4
 
-Side note: Newer `docker` and `docker-compose` versions might work too, though we currently cannot guarantee that. If you are successful in getting it to run on newer versions, please let us know about your experiences or consider contributing to this repository via Pull-Request.
+Side note: MacOS, Windows, and other Linux distros might work as well, but we have not tested those operating systems enough to list them as supported. In case you find out a certain operating system works fine, feel free to reach out and we will extend the list of supported operating systems.
 
 ## Table of Contents
 
