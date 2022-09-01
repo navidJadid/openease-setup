@@ -210,6 +210,8 @@ We provide an update script, so users do not need to manually update all the par
     -b: will build all the containers
     ```
 
+Note: The script automatically detects if you have an Apple Silicon processor and passes the `--platform linux/amd64` flag to the build if necessary.
+
 A few remarks on how the script works:
 
 - If executed without any option flags, the script will try to update the repositories and then build the containers. This is equivalent to running the script with both the `-u` and `-b` flags, except that the user will be prompted to confirm the actions.

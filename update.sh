@@ -56,7 +56,11 @@ function build-container {
     cd $1
     echo $PWD
     echo ""
+    if [[ "$OSTYPE" == "darwin"* ]] && [[ $(uname -m) == "arm64" ]]; then
+        docker build -t $2 --platform linux/amd64 .
+    else
     docker build -t $2 .
+    fi
 }
 
 function build-all-containers {
