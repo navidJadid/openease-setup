@@ -6,19 +6,15 @@ This is a small guide on how to currently set up openEASE, which will walk you t
 
 Requirements:
 
-- Debian Ubuntu 18.04 LTS or 20.04 LTS
 - git
 - docker
 - docker-compose
 
-Side note: In case the latest version of the requirements above do not work, the following versions are confirmed to build the project properly:
+Recommended
 
-- Debian Ubuntu 18.04 LTS
-- git
-- docker ver. 19.03.13, build 4484c46d9d
-- docker-compose 1.25.4
+- Debian Ubuntu 18.04 LTS or higher as operating system
 
-Side note: MacOS, Windows, and other Linux distros might work as well, but we have not tested those operating systems enough to list them as supported. In case you find out a certain operating system works fine, feel free to reach out and we will extend the list of supported operating systems.
+Note: docker-compose version 1.25.4 is guaranteed to work, if newer docker version exhibit problems.
 
 ## Table of Contents
 
@@ -32,7 +28,7 @@ Side note: MacOS, Windows, and other Linux distros might work as well, but we ha
 
 ## Set up the Workspace
 
-1. **Setting up your system**: As of now, `openEASE` **only** runs on Debian Ubuntu 18.04. Make sure to have `git`, `docker`, and `docker-compose` installed as well (pay attention to the version; see the requirements above).
+1. **Setting up your system**: We recommend running `openEASE` on Debian Ubuntu 18.04 or higher for the best experience. But it should be possible to run it on other operating systems as well. Furthermore, make sure to have `git`, `docker`, and `docker-compose` installed as well.
 
 2. **Cloning the necessary repositories**: There are two ways to clone the necessary repositories, which is either to do it manually, or by using our install-script.
 
@@ -46,7 +42,7 @@ Side note: MacOS, Windows, and other Linux distros might work as well, but we ha
     OPENEASE_ROOT_DIR=<path to the parent directory of the repositories>
     ```
 
-    Normally, the script would clone the `openease`, `knowrob` and `dockerbridge` repositories into the same parent directory, but if you instead want them to end upin different locations, then change the following paths:
+    Normally, the script would clone the `openease`, `knowrob` and `dockerbridge` repositories into the same parent directory, but if you instead want them to end up in different locations, then change the following paths:
 
     ``` shell
     OPENEASE_PARENT_DIR=<path to the openease repository>
@@ -156,9 +152,11 @@ Side note: MacOS, Windows, and other Linux distros might work as well, but we ha
         Then, in your terminal change to `<parent dir>/knowrob/docker` and run `docker build -t openease/knowrob .`
     - `openease-dockerbridge` container: Change to `<parent dir>/openease-dockerbridge` and run `docker build -t openease/dockerbridge .`
 
-    Alternatively, it is possible to build the containers with the update-script by passing the `-b` flag (s. [Workspace Update-Script](#workspace-update-script)). Make sure to follow the given steps, before executing the script.
+    Note: If you have an Apple Silicon processor, it is strongly recommended to add the `--platform linux/amd64` flag as well. This runs slower and consumes more memory than a native build, but it would likely fail otherwise, at least according to our testing. This might become obselete in future, but at least as of now we recommend it.
 
-    Side note: The `openease` and `knowrob` container will take some time to finish building. To save time, you can run the three builds in different terminals.
+    Alternatively, it is possible to build the containers with the update-script by passing the `-b` flag (s. [Workspace Update-Script](#workspace-update-script)). Make sure to follow the given steps, before executing the script. The script automatically detects if you have an Apple Silicon processor and passes the `--platform linux/amd64` flag to the build if necessary.
+
+    Note: The `openease` and `knowrob` container will take some time to finish building. If you have a multi-core processor, you can run the three builds in different terminals to save some time.
 
 ## Running the App
 
