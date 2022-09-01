@@ -14,7 +14,7 @@ Recommended
 
 - Debian Ubuntu 18.04 LTS or higher as operating system
 
-Note: docker-compose version 1.25.4 is guaranteed to work, if newer docker version exhibit problems.
+Note: docker-compose version 1.25.4 is guaranteed to work, if newer versions exhibit problems.
 
 ## Table of Contents
 
