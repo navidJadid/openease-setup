@@ -4,13 +4,13 @@ This is a small guide on how to currently set up openEASE, which will walk you t
 
 **IMPORTANT!** The `master`-branch does not install the openEASE node-modules separately. If that is necessary for development, check out either the [`node-modules`](https://github.com/navidJadid/openease-setup/tree/node-modules)-branch (can install and update them via script) or clone the necessary repositories yourself and place them within a `node_modules`-directory inside the `openease`-repository.
 
-Requirements:
+## Requirements
 
 - git
 - docker
 - docker-compose
 
-Recommended
+Recommended:
 
 - Debian Ubuntu 18.04 LTS or higher as operating system
 
